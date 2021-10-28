@@ -5,6 +5,7 @@ This app connects to the CKAN API of open union budget and the following things 
 - View , Search , filter all the datasets available
 - Table and Chart visualisation for the union budget dataset 
 
+Live Demo : https://sad-poitras-e837d6.netlify.app/
 ## Available Scripts
 
 In the project directory, you can run:
