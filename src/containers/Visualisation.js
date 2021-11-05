@@ -48,6 +48,10 @@ const VisualisationIndex = () => {
   };
 
   const formChartData = (data) => {
+    console.log(
+      "🚀 ~ file: Visualisation.js ~ line 51 ~ formChartData ~ data",
+      data
+    );
     setChartData(data);
   };
 

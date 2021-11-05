@@ -14,34 +14,42 @@ const ChartComponent = ({ chartData }) => {
 
   const formLegendsAndXaxis = (series) => {
     let legends = [];
-    let xAxis = [];
+    const xAxis = formatXaxis(series[0]);
     series.map((legend) => {
       legends.push(legend.key);
-      legend.values.map((value) => {
-        xAxis.push(value.label);
-      });
     });
-    const seriesData = formSeriesData(legends, series);
+    const seriesData = formSeriesData(xAxis, legends, series);
     return [legends, xAxis, seriesData];
   };
 
-  const formSeriesData = (legends, series) => {
+  const formatXaxis = (xAxisdata) => {
+    let xAxis = [];
+
+    xAxisdata.values.map((data) => {
+      xAxis.push(data.label);
+    });
+
+    return xAxis;
+  };
+
+  const formSeriesData = (xAxis, legends, series) => {
     let seriesData = [];
     series.map((data, index) => {
       seriesData.push({
         name: legends[index],
         type: "line",
         stack: "total",
-        data: formSeriesDataValues(data.values),
+        data: formSeriesDataValues(xAxis, data.values),
       });
     });
     return seriesData;
   };
 
-  const formSeriesDataValues = (data) => {
+  const formSeriesDataValues = (xAxis, data) => {
     let ValuesArray = [];
     data.map((item) => {
-      ValuesArray.push(item.value);
+      const checkMissingValue = xAxis.includes(item.label);
+      ValuesArray.push(checkMissingValue ? item.value : "-");
     });
     return ValuesArray;
   };
